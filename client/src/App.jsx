@@ -1,0 +1,26 @@
+import './App.css'
+import TablaUsuario from './views/TablaUsuario'
+import FormUsuario from './views/FormUsuario'
+import { Routes, Route } from "react-router-dom";
+
+function App() {
+
+  return (
+    <>
+      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <div className="container-fluid">
+          <a href="" className="navbar-brand">SGU-EOJ-10D</a>
+        </div>
+      </nav>
+
+      <div className="container mt-5">
+        <Routes>
+          <Route path="/" element={<TablaUsuario/>}/>
+          <Route path="/agregar" element={<FormUsuario/>}/>
+        </Routes>
+      </div>
+    </>
+  )
+}
+
+export default App
