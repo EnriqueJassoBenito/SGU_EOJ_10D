@@ -7,15 +7,19 @@ services:
       MYSQL_DATABASE: usuarios
     ports:
       - "3307:3306"
-    volumes:
-      - sgu-volume:/var/lib/mysql
     networks:
       - sgu-net
+    volumes:
+      - sgu-volume:/var/lib/mysql
 
   frontend:
+    image: client:1.0-sgu
     build:
       context: ./client
-    image: client:1.0-sgu
+      args:
+        API_HOST: localhost
+        API_BASE: /usuarios
+        API_PORT: 8081
     container_name: sgu-frontend
     ports:
       - "3000:80"
@@ -23,16 +27,11 @@ services:
       - backend
     networks:
       - sgu-net
-    environment:
-      VITE_API_HOST: sgu-backend
-      VITE_API_BASE: /usuarios
-      VITE_API_PORT: 8081
 
   backend:
+    image: server:1.0-sgu
     build:
       context: ./server
-    image: server:1.0-sgu
-    container_name: sgu-backend
     environment:
       SERVER_PORT: 8080
       DB_HOST: database
@@ -40,6 +39,7 @@ services:
       DB_NAME: usuarios
       DB_USER: root
       DB_PASS: root
+    container_name: sgu-backend
     ports:
       - "8081:8080"
     networks:
