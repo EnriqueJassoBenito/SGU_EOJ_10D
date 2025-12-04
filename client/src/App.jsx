@@ -1,6 +1,7 @@
 import './App.css'
 import TablaUsuario from './views/TablaUsuario'
 import FormUsuario from './views/FormUsuario'
+import FormUsuarioEditar from './views/FormUsuarioEditar';
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<TablaUsuario/>}/>
           <Route path="/agregar" element={<FormUsuario/>}/>
+          <Route path="/editar/:id" element={<FormUsuarioEditar />} />
         </Routes>
       </div>
     </>
